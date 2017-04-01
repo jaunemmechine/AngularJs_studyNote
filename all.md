@@ -146,6 +146,7 @@ $apply函数会调用$digest发起脏数据检查。
    3. AngularJS中,很多情况下都可以使用依赖注入。典型的如控制器创建时,需要用到$scope对象,这个对象不需要我们创建,而是由ng创建,并注入到控制器中。
    4. ng中,使用依赖注入的方式传入ng的需要对象时,要保证对象的名字一定是ng所规定的名字,否则会错误
    5. 可以被注入的对象---所有的service/provider对象都是可被注入的
+   
      a.$rootScope $scope  数据模型
 
      b.$interval $timeout 定时器
@@ -186,31 +187,44 @@ $apply函数会调用$digest发起脏数据检查。
                a12.num++;
            },1000);
        }])
-       ```
+   ```
 
    定义控制器时,第2个参数是个N+1个单元的数组,数组的前N个单元就是需要注入的字符串格式的对象名,最后一个单元是控制器的实现函数,其参数列表就是需要注入的N个对象,要注意这个n个参数的顺序要和前N个单元的顺序一样
 
 ## 模块加载
+
 ### 配置块
+
 通过config来实现对服务的配置（也可以更改一些服务的默认设置）,AngularJS绝大多数服务都有对应的provider。
 
 例如：$route 对应的$routeProvider(配置路由)
 
 ### 运行块
+
 特殊：run方法 还是最先执行的。
 
 案例：比如验证用户是否登录，未登录则不允许进行任何其它操作
 
 ## 路由
+
 ### 功能：一个应用由若干个视图组成，然后,根据不同的业务逻辑展示不同的视图给用户。
+
 ### 理解
+
 #### SPA：Single Page Application 单页面应用
+
 #### 链接使用锚点
+
 #### 单一页面原理：单页面通过hashchange事件监听锚点的变化，实现不同锚点准备找到对应的视图
+
 #### 路由: AngularJS基于单一页面原理进行封装，将锚点变化封装成路由，这也是与后端路由的根本区别
+
 #### 路由的使用： 需引入angular-route.js文件
+
 #### 实例化模块，传入依赖（路由名称为：ngRoute）
+
 #### 配置路由（config、$routeProvider、when（条件））
+
 ```
 App.config(['$routeProvider',function($routeProvider){
         //配置路由
@@ -219,7 +233,9 @@ App.config(['$routeProvider',function($routeProvider){
         });
     }]);
 ```
+
 #### 布局模板（用ng-view指令，路由匹配的视图会渲染到该区域）
+
 ```
 <header>头部</header>
 <div class="container">
@@ -228,18 +244,26 @@ App.config(['$routeProvider',function($routeProvider){
 </div>
 <footer>底部</footer>
 ```
+
 #### 路由的参数
+
 #####  两种方法匹配路由:when和otherwise，when可以调用多次。otherwise作为when的补充，参数只有一个。
+
 #####  when有两个参数
+
 1. 参数1：是个字符串，代表当前url的hash值；例如："/：type"
 2. 参数2：是一个对象，配置当前路由参数，如视图、控制器
 
 #### template：字符串形式视图模板
+
 #### templateUrl：引入外部视图模板
+
 #### controller：视图模板所属控制器，作用之一：通过http请求向后台要数据
+
 #### redirectTo：跳转到其他路由 例如：“/2”；
 
 #### 获取路由参数，在控制器中注入$routeParams，可以传递参数给后台或其他。
+
 ```
 //url 地址
 // http://localhost/AngularJs/myng.html#/index/10
